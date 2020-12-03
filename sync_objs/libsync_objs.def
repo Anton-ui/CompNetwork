@@ -1,0 +1,36 @@
+EXPORTS
+    _ZN9sync_objs14barrier_threadC1Ey @1
+    _ZN9sync_objs14barrier_threadC2Ey @2
+    _ZN9sync_objs14barrier_threadD1Ev @3
+    _ZN9sync_objs14barrier_threadD2Ev @4
+    _ZN9sync_objs15rotation_threadC1Ey @5
+    _ZN9sync_objs15rotation_threadC2Ey @6
+    _ZN9sync_objs15rotation_threadD1Ev @7
+    _ZN9sync_objs15rotation_threadD2Ev @8
+    _ZN9sync_objs16rotation_processC1EPKc @9
+    _ZN9sync_objs16rotation_processC1EPKcy @10
+    _ZN9sync_objs16rotation_processC2EPKc @11
+    _ZN9sync_objs16rotation_processC2EPKcy @12
+    _ZN9sync_objs16rotation_processD1Ev @13
+    _ZN9sync_objs16rotation_processD2Ev @14
+    _ZN9sync_objs25critical_section_2_thread12enter_regionEi @15
+    _ZN9sync_objs25critical_section_2_thread12leave_regionEi @16
+    _ZN9sync_objs25critical_section_2_threadC1Ev @17
+    _ZN9sync_objs25critical_section_2_threadC2Ev @18
+    _ZN9sync_objs25critical_section_2_threadD1Ev @19
+    _ZN9sync_objs25critical_section_2_threadD2Ev @20
+    _ZN9sync_objs25critical_section_n_thread12enter_regionEi @21
+    _ZN9sync_objs25critical_section_n_thread12leave_regionEi @22
+    _ZN9sync_objs25critical_section_n_threadC1Ey @23
+    _ZN9sync_objs25critical_section_n_threadC2Ey @24
+    _ZN9sync_objs25critical_section_n_threadD1Ev @25
+    _ZN9sync_objs25critical_section_n_threadD2Ev @26
+    _ZN9sync_objs7barrier4waitEy @27
+    _ZN9sync_objs7barrier5resetEv @28
+    _ZN9sync_objs8rotation12enter_regionEy @29
+    _ZN9sync_objs8rotation12leave_regionEv @30
+
+IMPORTS
+
+    error.dll._Z5ErrorPKc
+    error.dll._Z6StatusmPKc
