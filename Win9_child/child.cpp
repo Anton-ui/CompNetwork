@@ -1,6 +1,6 @@
 //c++ 11
 
-#include "..\main\main.hpp"
+#include "..\win9\main.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 #ifdef SYNC
 		rt -> enter_region(num);//Синхронизация
 #endif
-		cout << i << endl;
+		cout << i << " " << "process " << num << endl;
 #ifdef SYNC
 		rt -> leave_region();//Синхронизация
 #endif

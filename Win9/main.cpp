@@ -11,7 +11,7 @@ int main(int argc, char** argv)
 #endif
 	//Создание дочерних процессов
 	char lpszAppName[_MAX_PATH];
-	_fullpath( lpszAppName, "..\\child\\child.exe", _MAX_PATH);
+	_fullpath( lpszAppName, "..\\Win9_child\\child.exe", _MAX_PATH);
 	STARTUPINFO  si[P - 1];
 	PROCESS_INFORMATION  pi[P - 1];
 	HANDLE hProcess[P - 1];
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 #ifdef SYNC
 		rt->enter_region(0);//Синхронизация
 #endif
-		cout << i << endl;
+		cout << i << " " << "main" << endl;
 #ifdef SYNC
 		rt->leave_region();//Синхронизация
 #endif

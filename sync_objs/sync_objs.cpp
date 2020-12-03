@@ -126,17 +126,17 @@ barrier_thread::barrier_thread(size_t Count)
 //rotation_process
 rotation_process::rotation_process(const char * name, size_t Count) 		 
 { 
-	if(Count != 2)
-		Error("Size is out of range");
 	//Открываем объект отображения файла в память
-	hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(size_t), name);
+	hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 2*sizeof(size_t), name);
 	if(hMapping == nullptr)
 		Error("Create file mapping failed");
     //Создаем вид файла
 	turn = static_cast<volatile size_t*>(MapViewOfFile(hMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0));
 	if(turn == nullptr)
 		Error("Create view failed");
+	count = turn + 1;
 	*turn = 0;
+	*count = Count;
 }
 rotation_process::rotation_process(const char * name) 		 
 { 
@@ -148,6 +148,7 @@ rotation_process::rotation_process(const char * name)
 	turn = static_cast<volatile size_t*>(MapViewOfFile(hMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0));
 	if(turn == nullptr)
 		Error("Create view failed");
+	count = turn + 1;
 } 
 rotation_process::~rotation_process() 		/* process имеет значение 0 или 1 */ 
 { 

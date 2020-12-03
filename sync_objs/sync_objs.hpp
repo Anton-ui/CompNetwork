@@ -76,7 +76,7 @@ namespace sync_objs
 	
 	
 	//----------------processes---------------------
-	
+// rotation_process	
 	class DLL_SO rotation_process : public rotation
 	{
 	private:
