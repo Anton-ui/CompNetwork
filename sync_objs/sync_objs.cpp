@@ -158,4 +158,67 @@ rotation_process::~rotation_process() 		/* process имеет значение 0 или 1 */
 	//Закрываем дескриптор
 	if(!CloseHandle(hMapping))
 		Error("Can't close handle");
-} 
+}
+
+// Peterson's algorithm for N processes
+critical_section_n_process::critical_section_n_process(const char * name, size_t Count)
+{
+	//Создаем объект отображения файла в память
+	hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 2*sizeof(size_t)*Count, name);
+	if(hMapping == nullptr)
+		Error("Create file mapping failed");
+    //Создаем вид файла
+	count = static_cast<volatile size_t*>(MapViewOfFile(hMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0));
+	if(count == nullptr)
+		Error("Create view failed");
+	turn = count + 1;
+	stage = turn + Count - 1;
+	//Инициализируем переменные
+	*count = Count;
+	for (size_t i = 0; i < *count - 1; i++)
+	{
+		turn[i] = 0;
+		stage[i] = 0;
+	}
+	stage[*count - 1] = 0;
+}
+critical_section_n_process::critical_section_n_process(const char * name)
+{
+	//Открываем объект отображения файла в память
+	hMapping = OpenFileMapping(FILE_MAP_ALL_ACCESS,false,name);
+	if(hMapping == nullptr)
+		Error("Open file mapping failed");
+	//Создаем вид файла
+	count = static_cast<volatile size_t*>(MapViewOfFile(hMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0));
+	if(count == nullptr)
+		Error("Create view failed");
+	turn = count + 1;
+	stage = turn + *count - 1;
+}
+critical_section_n_process::~critical_section_n_process()
+{
+	//Отменяем отображение файла в память
+	if(!UnmapViewOfFile(const_cast<size_t*>(count)))
+		Error("Unmap view failed");
+	//Закрываем дескриптор
+	if(!CloseHandle(hMapping))
+		Error("Can't close handle");
+}
+void critical_section_n_process::enter_region(size_t process)
+{
+	for (size_t i = 0; i < *count - 1; i++) // перебор всех стадий
+	{
+		stage[process] = i + 1;
+		turn[i] = process;
+		for (size_t k = 0; k < *count; k++)
+		{
+			if (k == process)
+				continue;
+			while (stage[k] > i && turn[i] == process) Sleep(S);
+		}
+	}
+}
+void critical_section_n_process::leave_region(size_t process)
+{
+	stage[process] = 0;
+}

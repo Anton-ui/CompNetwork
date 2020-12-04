@@ -86,5 +86,21 @@ namespace sync_objs
 		rotation_process(const char *, size_t);
 		~rotation_process();
 	};
+	
+// Peterson's algorithm for N processes
+	class DLL_SO critical_section_n_process
+	{
+	private:
+		HANDLE hMapping;
+		volatile size_t *count;
+		volatile size_t *stage;
+		volatile size_t *turn;
+	public:
+		critical_section_n_process(const char *);
+		critical_section_n_process(const char *, size_t);
+		~critical_section_n_process();
+		void enter_region(size_t);
+		void leave_region(size_t);
+	};
 }
 #endif

@@ -25,10 +25,18 @@ EXPORTS
     _ZN9sync_objs25critical_section_n_threadC2Ey @24
     _ZN9sync_objs25critical_section_n_threadD1Ev @25
     _ZN9sync_objs25critical_section_n_threadD2Ev @26
-    _ZN9sync_objs7barrier4waitEy @27
-    _ZN9sync_objs7barrier5resetEv @28
-    _ZN9sync_objs8rotation12enter_regionEy @29
-    _ZN9sync_objs8rotation12leave_regionEv @30
+    _ZN9sync_objs26critical_section_n_process12enter_regionEy @27
+    _ZN9sync_objs26critical_section_n_process12leave_regionEy @28
+    _ZN9sync_objs26critical_section_n_processC1EPKc @29
+    _ZN9sync_objs26critical_section_n_processC1EPKcy @30
+    _ZN9sync_objs26critical_section_n_processC2EPKc @31
+    _ZN9sync_objs26critical_section_n_processC2EPKcy @32
+    _ZN9sync_objs26critical_section_n_processD1Ev @33
+    _ZN9sync_objs26critical_section_n_processD2Ev @34
+    _ZN9sync_objs7barrier4waitEy @35
+    _ZN9sync_objs7barrier5resetEv @36
+    _ZN9sync_objs8rotation12enter_regionEy @37
+    _ZN9sync_objs8rotation12leave_regionEv @38
 
 IMPORTS
 

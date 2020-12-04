@@ -1,6 +1,6 @@
 //c++ 11
 
-#include "..\main\main.hpp"
+#include "..\win11\main.hpp"
 
 int main(int argc, char* argv[])
 {
