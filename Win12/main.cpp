@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 #endif
 	//Создание дочерних процессов
 	char lpszAppName[_MAX_PATH];
-	_fullpath( lpszAppName, "..\\child\\child.exe", _MAX_PATH);
+	_fullpath( lpszAppName, "..\\Win12_child\\child.exe", _MAX_PATH);
 	STARTUPINFO  si[P - 1];
 	PROCESS_INFORMATION  pi[P - 1];
 	HANDLE hProcess[P - 1];

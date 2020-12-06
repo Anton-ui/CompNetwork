@@ -60,7 +60,7 @@ namespace sync_objs
 	{
 	protected:
 		volatile size_t *ibarrier;
-		size_t *count;
+		volatile size_t *count;
 	public:
 		void wait(size_t);
 		void reset();	
@@ -102,5 +102,16 @@ namespace sync_objs
 		void enter_region(size_t);
 		void leave_region(size_t);
 	};
+	
+// barrier_process
+	class DLL_SO barrier_process : public barrier
+	{
+		private:
+			HANDLE hMapping;
+		public:
+			barrier_process(const char*);
+			barrier_process(const char*, size_t);
+			~barrier_process();
+	};	
 }
 #endif

@@ -222,3 +222,34 @@ void critical_section_n_process::leave_region(size_t process)
 {
 	stage[process] = 0;
 }
+
+// barrier_process
+barrier_process::barrier_process(const char * name, size_t Count)
+{
+	hMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 2*sizeof(size_t), name);
+	if(hMapping == nullptr)
+		Error("Create file mapping failed");
+	ibarrier = static_cast<volatile size_t*>(MapViewOfFile(hMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0));
+	if(ibarrier == nullptr)
+		Error("Create view failed");
+	count = ibarrier + 1;
+	*ibarrier = 0;
+	*count = Count;
+}
+barrier_process::barrier_process(const char * name)
+{
+	hMapping = OpenFileMapping(FILE_MAP_ALL_ACCESS,false,name);
+	if(hMapping == nullptr)
+		Error("Open file mapping failed");
+	ibarrier = static_cast<volatile size_t*>(MapViewOfFile(hMapping, FILE_MAP_ALL_ACCESS, 0, 0, 0));
+	if(ibarrier == nullptr)
+		Error("Create view failed");
+	count = ibarrier + 1;
+}
+barrier_process::~barrier_process()
+{
+	if(!UnmapViewOfFile(const_cast<size_t*>(ibarrier)))
+		Error("Unmap view failed");
+	if(!CloseHandle(hMapping))
+		Error("Can't close handle");
+}
